@@ -1,4 +1,4 @@
-package org.ing.hackathon.totalrecall.api.model;
+package org.ing.hackathon.totalrecall.api.model.api;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;

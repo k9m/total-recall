@@ -1,7 +1,7 @@
 package org.ing.hackathon.totalrecall.api.config;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import org.ing.hackathon.totalrecall.api.model.Client;
+import org.ing.hackathon.totalrecall.api.model.api.Client;
 import org.ing.hackathon.totalrecall.api.repo.ClientRepository;
 import org.ing.hackathon.totalrecall.api.util.JsonUtils;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -4,9 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class TotalRecallApiApplication {
+public class TotalRecallApiApp {
 
 	public static void main(String[] args) {
-		SpringApplication.run(TotalRecallApiApplication.class, args);
+		SpringApplication.run(TotalRecallApiApp.class, args);
 	}
 }

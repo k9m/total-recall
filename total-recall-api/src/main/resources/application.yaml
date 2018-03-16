@@ -1,2 +1,7 @@
 server:
   port: 9800
+
+
+spring:
+  application:
+    name: total-recall-api

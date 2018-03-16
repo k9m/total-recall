@@ -10,12 +10,11 @@
 	</parent>
 
 	<groupId>org.ing.hackathon.totalrecall</groupId>
-	<artifactId>total-recall-api</artifactId>
+	<artifactId>total-recall-docstore</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>total-recall-api</name>
-	<description>Demo project for Spring Boot</description>
+	<name>total-recall-docstore</name>
 
 
 	<dependencies>
@@ -32,19 +31,21 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-rest</artifactId>
+			<groupId>org.springframework.retry</groupId>
+			<artifactId>spring-retry</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-hateoas</artifactId>
+			<artifactId>spring-boot-starter-aop</artifactId>
 		</dependency>
 
-
 		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<scope>runtime</scope>
+			<groupId>org.elasticsearch</groupId>
+			<artifactId>elasticsearch</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.elasticsearch.client</groupId>
+			<artifactId>transport</artifactId>
 		</dependency>
 
 		<dependency>

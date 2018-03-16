@@ -20,6 +20,7 @@
 
 	<modules>
 		<module>total-recall-api</module>
+		<module>total-recall-docstore</module>
 		<module>total-recall-common</module>
 	</modules>
 
@@ -27,6 +28,8 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
+
+		<elasticsearch.version>6.1.3</elasticsearch.version>
 	</properties>
 
 	<dependencyManagement>
@@ -36,19 +39,31 @@
 				<artifactId>total-recall-common</artifactId>
 				<version>${project.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>org.ing.hackathon.totalrecall</groupId>
+				<artifactId>total-recall-api</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.ing.hackathon.totalrecall</groupId>
+				<artifactId>total-recall-docstore</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.elasticsearch</groupId>
+				<artifactId>elasticsearch</artifactId>
+				<version>${elasticsearch.version}</version>
+			</dependency>
+
+			<!-- Specific Elasticsearch 6 dependencies -->
+			<dependency>
+				<groupId>org.elasticsearch.client</groupId>
+				<artifactId>elasticsearch-rest-high-level-client</artifactId>
+				<version>6.1.1</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
-
-
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
 
 
 </project>

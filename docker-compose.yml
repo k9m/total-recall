@@ -1,0 +1,33 @@
+version: '3.2'
+
+services:
+
+  elastic:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.2.1
+    container_name: elastic-docstore
+    environment:
+      - cluster.name=docstore
+      - bootstrap.memory_lock=true
+      - network.host=0.0.0.0
+      - xpack.security.enabled=false
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+      - 9300:9300
+
+  portainer:
+    image: portainer/portainer:latest
+    container_name: portainer
+    ports:
+      - "9000:9000"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+
+volumes:
+  esdata:
+    driver: local
