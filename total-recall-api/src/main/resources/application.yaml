@@ -4,4 +4,4 @@ server:
 
 spring:
   application:
-    name: total-recall-api
+    name: total-recall-docprocessor

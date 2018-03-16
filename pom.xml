@@ -21,6 +21,7 @@
 	<modules>
 		<module>total-recall-api</module>
 		<module>total-recall-docstore</module>
+		<module>total-recall-docprocessor</module>
 		<module>total-recall-common</module>
 	</modules>
 

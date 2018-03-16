@@ -1,0 +1,6 @@
+server:
+  port: 9802
+
+spring:
+  application:
+    name: total-recall-docprocessor

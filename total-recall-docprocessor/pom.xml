@@ -10,11 +10,11 @@
 	</parent>
 
 	<groupId>org.ing.hackathon.totalrecall</groupId>
-	<artifactId>total-recall-docstore</artifactId>
+	<artifactId>total-recall-docprocessor</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>total-recall-docstore</name>
+	<name>total-recall-docprocessor</name>
 
 
 	<dependencies>
