@@ -52,13 +52,8 @@
 		</dependency>
 
 		<dependency>
-			<groupId>edu.stanford.nlp</groupId>
-			<artifactId>stanford-corenlp</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>edu.stanford.nlp</groupId>
-			<artifactId>stanford-corenlp</artifactId>
-			<classifier>models</classifier>
+			<groupId>org.k9m.k9nlp</groupId>
+			<artifactId>k9nlp-tokeniser</artifactId>
 		</dependency>
 	</dependencies>
 
