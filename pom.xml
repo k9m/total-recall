@@ -32,6 +32,7 @@
 
 		<elasticsearch.version>6.1.3</elasticsearch.version>
 		<itext.pdf.version>5.5.13</itext.pdf.version>
+		<stanford.nlp>3.9.1</stanford.nlp>
 	</properties>
 
 	<dependencyManagement>
@@ -63,6 +64,19 @@
 				<groupId>org.elasticsearch.client</groupId>
 				<artifactId>elasticsearch-rest-high-level-client</artifactId>
 				<version>6.1.1</version>
+			</dependency>
+
+			<!-- Specific Stanford NLP dependencies -->
+			<dependency>
+				<groupId>edu.stanford.nlp</groupId>
+				<artifactId>stanford-corenlp</artifactId>
+				<version>${stanford.nlp}</version>
+			</dependency>
+			<dependency>
+				<groupId>edu.stanford.nlp</groupId>
+				<artifactId>stanford-corenlp</artifactId>
+				<classifier>models</classifier>
+				<version>${stanford.nlp}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
