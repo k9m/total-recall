@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 
 import javax.annotation.PostConstruct;
-import java.util.UUID;
 
 @Configuration
 public class Initialiser {
@@ -27,7 +26,7 @@ public class Initialiser {
   @PostConstruct
   public void init(){
     final byte[] financialStatements = fileUtils.getBytesForFile("sample/financial-statements.pdf");
-    final String documentId = UUID.randomUUID().toString();
+    final String documentId = "f9067827-d579-460d-9307-ae6fa41f6379";
     final Document document = Document.builder()
             .documentId(documentId)
             .documentType("FINANCIAL-STATEMENT")
