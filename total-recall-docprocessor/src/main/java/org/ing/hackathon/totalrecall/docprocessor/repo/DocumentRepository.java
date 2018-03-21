@@ -1,6 +1,6 @@
 package org.ing.hackathon.totalrecall.docprocessor.repo;
 
-import org.ing.hackathon.totalrecall.docprocessor.model.api.Document;
+import org.ing.hackathon.totalrecall.docprocessor.model.docprocessor.Document;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 

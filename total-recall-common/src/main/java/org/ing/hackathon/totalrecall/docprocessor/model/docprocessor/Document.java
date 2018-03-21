@@ -1,13 +1,12 @@
-package org.ing.hackathon.totalrecall.docprocessor.model.api;
+package org.ing.hackathon.totalrecall.docprocessor.model.docprocessor;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.Tolerate;
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Lob;
+import javax.persistence.*;
 
 @Data
 @Builder
@@ -24,7 +23,13 @@ public class Document {
 
   private String fileName;
 
+  @OneToOne(fetch = FetchType.LAZY,
+          cascade =  CascadeType.ALL,
+          mappedBy = "document")
+  private DocumentMetaData documentMetaData;
+
   @Lob
+  @JsonIgnore
   private byte[] document;
 
   @Tolerate
