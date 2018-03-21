@@ -22,14 +22,26 @@ export class AppComponent implements OnInit {
     }
 
     updateRegion(region: Region, marker: RegionMarkerComponent) {
-        region.field = marker.field;
-        region.left = marker.left;
-        region.top = marker.top;
-        region.width = marker.width;
-        region.height = marker.height;
+        if (
+            marker.field !== undefined &&
+            marker.left !== undefined &&
+            marker.top !== undefined &&
+            marker.width !== undefined &&
+            marker.height !== undefined
+        ) {
+            region.field = marker.field;
+            region.left = marker.left;
+            region.top = marker.top;
+            region.width = marker.width;
+            region.height = marker.height;
+        }
     }
 
     addRegion(region: Region) {
         this.currentPage.mask.regions.push(region);
+    }
+
+    removeRegion(region: Region) {
+        this.currentPage.mask.regions.splice(this.currentPage.mask.regions.indexOf(region), 1);
     }
 }

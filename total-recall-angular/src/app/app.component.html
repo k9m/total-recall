@@ -12,7 +12,8 @@
                        [width]="region.width"
                        [height]="region.height"
                        [field]="region.field"
-                       (change)="updateRegion(region, $event)">
+                       (change)="updateRegion(region, $event)"
+                       (removal)="removeRegion(region)">
     </app-region-marker>
   </app-document-page>
 </app-document>

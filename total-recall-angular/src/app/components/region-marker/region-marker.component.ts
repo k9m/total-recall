@@ -1,4 +1,4 @@
-import {Component, ElementRef, EventEmitter, HostListener, Input, Output} from '@angular/core';
+import {Component, EventEmitter, HostListener, Input, Output} from '@angular/core';
 
 class DraggingState {
     originalLeft: number;
@@ -46,6 +46,7 @@ export class RegionMarkerComponent {
     @Input() height: number;
     @Input() field: string;
     @Output() change = new EventEmitter<any>();
+    @Output() removal = new EventEmitter<any>();
     draggingState: DraggingState;
     resizingState: ResizingState;
 
@@ -133,5 +134,9 @@ export class RegionMarkerComponent {
     updateField(field) {
         this.field = field;
         this.change.emit(this);
+    }
+
+    remove() {
+        this.removal.emit(this);
     }
 }
