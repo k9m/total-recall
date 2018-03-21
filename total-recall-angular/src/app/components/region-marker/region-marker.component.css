@@ -1,14 +1,89 @@
 .app-region-marker {
     position: absolute;
     border: solid 3px green;
+    cursor: move;
 }
 
 .app-region-marker-title {
-    position: absolute;
-
     background-color: green;
-    left: 0px;
-    bottom: 100%;
-    min-height: 30px;
+    color: #FFFFFF;
+
+    position: absolute;
+    margin-top: -23px;
     min-width: 50px;
+}
+
+.app-region-marker-input {
+    background-color: transparent;
+    outline: none;
+    border: none;
+    color: #FFFFFF;
+
+    padding: 5px;
+
+    min-width: 50px;
+}
+
+.app-region-marker-resizer {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+
+    background-color: #999999;
+}
+
+.app-region-marker-resizer-right,
+.app-region-marker-resizer-left {
+    top: 50%;
+    margin-top: -5px;
+}
+
+.app-region-marker-resizer-left {
+    left: -5px;
+    cursor: w-resize;
+}
+
+.app-region-marker-resizer-right {
+    right: -5px;
+    cursor: e-resize;
+}
+
+.app-region-marker-resizer-top,
+.app-region-marker-resizer-bottom {
+    left: 50%;
+    margin-left: -5px;
+}
+
+.app-region-marker-resizer-top {
+    top: -5px;
+    cursor: n-resize;
+}
+
+.app-region-marker-resizer-bottom {
+    bottom: -5px;
+    cursor: s-resize;
+}
+
+.app-region-marker-resizer-top-left {
+    top: -5px;
+    left: -5px;
+    cursor: nw-resize;
+}
+
+.app-region-marker-resizer-top-right {
+    top: -5px;
+    right: -5px;
+    cursor: ne-resize;
+}
+
+.app-region-marker-resizer-bottom-left {
+    bottom: -5px;
+    left: -5px;
+    cursor: sw-resize;
+}
+
+.app-region-marker-resizer-bottom-right {
+    bottom: -5px;
+    right: -5px;
+    cursor: se-resize;
 }

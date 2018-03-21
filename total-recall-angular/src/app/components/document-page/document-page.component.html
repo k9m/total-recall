@@ -1,4 +1,4 @@
 <div class="app-document-page">
   <ng-content></ng-content>
-  <img [src]="imageUri" />
+  <img [src]="imageUri" (mousedown)="startCreating($event)" />
 </div>

@@ -12,10 +12,8 @@ export class DocumentsService {
   getDocument() {
     return new Document([
         new DocumentPage("http://localhost:9802/docprocessor/test1", 1, new Mask([
-            new Region("Title", 20, 20, 100, 30)
         ])),
         new DocumentPage("http://localhost:9802/docprocessor/test1", 2, new Mask([
-            new Region("Title", 20, 20, 100, 30)
         ]))
     ])
   }

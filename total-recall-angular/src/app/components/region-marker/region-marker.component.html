@@ -1,3 +1,13 @@
-<div class="app-region-marker" [style.left.px]="left" [style.top.px]="top" [style.width.px]="width" [style.height.px]="height">
-  <div class="app-region-marker-title">{{field}}</div>
+<div class="app-region-marker-title" [style.left.px]="left" [style.top.px]="top">
+  <input type="text" class="app-region-marker-input" AutoSizeInput [value]="field" (input)="updateField($event.target.value)" />
+</div>
+<div class="app-region-marker" [style.left.px]="left" [style.top.px]="top" [style.width.px]="width" [style.height.px]="height" (mousedown)="startDragging($event)">
+  <div class="app-region-marker-resizer app-region-marker-resizer-left" (mousedown)="startResize($event, 'left')"></div>
+  <div class="app-region-marker-resizer app-region-marker-resizer-top-left" (mousedown)="startResize($event, 'top-left')"></div>
+  <div class="app-region-marker-resizer app-region-marker-resizer-top" (mousedown)="startResize($event, 'top')"></div>
+  <div class="app-region-marker-resizer app-region-marker-resizer-right" (mousedown)="startResize($event, 'right')"></div>
+  <div class="app-region-marker-resizer app-region-marker-resizer-top-right" (mousedown)="startResize($event, 'top-right')"></div>
+  <div class="app-region-marker-resizer app-region-marker-resizer-bottom-left" (mousedown)="startResize($event, 'bottom-left')"></div>
+  <div class="app-region-marker-resizer app-region-marker-resizer-bottom" (mousedown)="startResize($event, 'bottom')"></div>
+  <div class="app-region-marker-resizer app-region-marker-resizer-bottom-right" (mousedown)="startResize($event, 'bottom-right')"></div>
 </div>

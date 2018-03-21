@@ -10,6 +10,7 @@ import { DocumentComponent } from './components/document/document.component';
 import {MatSidenavModule} from "@angular/material";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { DocumentPageThumbComponent } from './components/document-page-thumb/document-page-thumb.component';
+import {AutoSizeInputModule} from "ngx-autosize-input";
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { DocumentPageThumbComponent } from './components/document-page-thumb/doc
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    MatSidenavModule
+    MatSidenavModule,
+    AutoSizeInputModule
   ],
   providers: [DocumentsService],
   bootstrap: [AppComponent]

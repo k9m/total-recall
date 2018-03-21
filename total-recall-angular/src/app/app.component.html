@@ -1,8 +1,18 @@
 <app-document>
-  <app-document-page-thumb *ngFor="let page of document.pages" [pageImageUri]="page.pageImageUri" [pageNr]="page.pageNr" (select)="currentPage = page">
+  <app-document-page-thumb *ngFor="let page of document.pages"
+                           [pageImageUri]="page.pageImageUri"
+                           [pageNr]="page.pageNr"
+                           (select)="currentPage = page">
 
   </app-document-page-thumb>
-  <app-document-page [imageUri]="currentPage.pageImageUri">
-    <app-region-marker [left]="20" [top]="20" [width]="50" [height]="30" field="Some"></app-region-marker>
+  <app-document-page [imageUri]="currentPage.pageImageUri" (newRegion)="addRegion($event)">
+    <app-region-marker *ngFor="let region of currentPage.mask.regions"
+                       [left]="region.left"
+                       [top]="region.top"
+                       [width]="region.width"
+                       [height]="region.height"
+                       [field]="region.field"
+                       (change)="updateRegion(region, $event)">
+    </app-region-marker>
   </app-document-page>
 </app-document>
