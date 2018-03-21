@@ -1,0 +1,12 @@
+:host {
+    height: 100%;
+    display: block;
+}
+
+.app-document {
+    height: 100%;
+}
+
+.app-document-sidenav {
+    background-color: #EEEEEE;
+}

@@ -1,0 +1,29 @@
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+html {
+    box-sizing: border-box;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    font-family: Helvetica, Arial, Sans-serif;
+    font-size: .8rem;
+}
+
+label {
+    display: inline-block;
+    margin-left: 1rem;
+    cursor: pointer;
+    user-select: none;
+    font-size: 1vw;
+}

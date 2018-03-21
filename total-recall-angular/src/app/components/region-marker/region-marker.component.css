@@ -1,0 +1,14 @@
+.app-region-marker {
+    position: absolute;
+    border: solid 3px green;
+}
+
+.app-region-marker-title {
+    position: absolute;
+
+    background-color: green;
+    left: 0px;
+    bottom: 100%;
+    min-height: 30px;
+    min-width: 50px;
+}

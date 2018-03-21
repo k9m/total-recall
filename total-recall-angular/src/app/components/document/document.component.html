@@ -1,0 +1,13 @@
+<mat-drawer-container class="app-document" autosize>
+  <mat-drawer #drawer opened class="app-document-sidenav" mode="side">
+    <ng-content select="app-document-page-thumb"></ng-content>
+  </mat-drawer>
+
+  <div class="example-sidenav-content">
+    <!--button type="button" mat-button (click)="drawer.toggle()">
+      Toggle sidenav
+    </button-->
+
+    <ng-content select="app-document-page"></ng-content>
+  </div>
+</mat-drawer-container>

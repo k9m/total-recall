@@ -1,0 +1,17 @@
+:host {
+    background-color: #FFFFFF;
+    border: solid 2px #CCCCCC;
+    border-radius: 3px;
+    cursor: pointer;
+
+    padding: 5px;
+    margin: 15px;
+    display: block;
+
+    text-align: center;
+    font-weight: bold;
+}
+
+:host:hover {
+    border-color: #999999;
+}
