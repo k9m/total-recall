@@ -12,8 +12,8 @@ import org.elasticsearch.client.Client;
 import org.elasticsearch.common.xcontent.XContentType;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.search.sort.SortOrder;
-import org.ing.hackathon.totalrecall.docprocessor.model.api.docstore.DocWrapper;
-import org.ing.hackathon.totalrecall.docprocessor.model.api.docstore.SearchResults;
+import org.ing.hackathon.totalrecall.docprocessor.model.docstore.DocWrapper;
+import org.ing.hackathon.totalrecall.docprocessor.model.docstore.SearchResults;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

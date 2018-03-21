@@ -1,4 +1,4 @@
-package org.ing.hackathon.totalrecall.docprocessor.model.api.docstore;
+package org.ing.hackathon.totalrecall.docprocessor.model.docstore;
 
 import lombok.Builder;
 import lombok.Data;

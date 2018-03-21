@@ -2,7 +2,7 @@ package org.ing.hackathon.totalrecall.docprocessor.endpoint;
 
 import lombok.RequiredArgsConstructor;
 import org.ing.hackathon.totalrecall.docprocessor.config.elastic.ElasticClientImpl;
-import org.ing.hackathon.totalrecall.docprocessor.model.api.docstore.DocWrapper;
+import org.ing.hackathon.totalrecall.docprocessor.model.docstore.DocWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
