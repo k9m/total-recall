@@ -50,6 +50,11 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>org.k9m.k9nlp</groupId>
+			<artifactId>k9nlp-tokeniser</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>

@@ -1,4 +1,4 @@
-package org.ing.hackathon.totalrecall.docprocessor.model.api.docstore;
+package org.ing.hackathon.totalrecall.docprocessor.model.docstore;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;

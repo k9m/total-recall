@@ -2,6 +2,7 @@ package org.ing.hackathon.totalrecall.docprocessor.endpoint;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.ing.hackathon.totalrecall.docprocessor.model.DocumentImage;
 import org.ing.hackathon.totalrecall.docprocessor.service.PdfToImageConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -9,13 +10,11 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 @Slf4j
 @RestController
-@RequestMapping(value = "/docprocessor")
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
+@RequestMapping("/")
 public class DocProcessorEndpoint {
 
   @Autowired
@@ -40,14 +39,9 @@ public class DocProcessorEndpoint {
     return pdfToImageConverter.convertToByte();
   }
 
-  @GetMapping(path = "test2")
-  public Map<String,String> testObject() throws IOException {
-    log.info("here");
-    Map<String,String> blah = new HashMap<>();
-
-    blah.put("test", pdfToImageConverter.convertToImage());
-
-    return blah;
+  @GetMapping("/document-images/{documentId}")
+  public DocumentImage getDocumentImages(@PathVariable final String documentId) throws IOException {
+    return pdfToImageConverter.convertToImage();
   }
 
 }

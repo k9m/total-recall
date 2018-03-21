@@ -32,6 +32,7 @@
 
 		<elasticsearch.version>6.1.3</elasticsearch.version>
 		<itext.pdf.version>5.5.13</itext.pdf.version>
+		<k9nlp.tokeniser>1.1.0-SNAPSHOT</k9nlp.tokeniser>
 	</properties>
 
 	<dependencyManagement>
@@ -63,6 +64,12 @@
 				<groupId>org.elasticsearch.client</groupId>
 				<artifactId>elasticsearch-rest-high-level-client</artifactId>
 				<version>6.1.1</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.k9m.k9nlp</groupId>
+				<artifactId>k9nlp-tokeniser</artifactId>
+				<version>${k9nlp.tokeniser}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
