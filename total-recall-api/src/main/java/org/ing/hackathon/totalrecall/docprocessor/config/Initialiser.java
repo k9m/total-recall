@@ -19,6 +19,7 @@ public class Initialiser {
   @Autowired
   private ClientRepository clientRepository;
 
+
   @PostConstruct
   public void init(){
     List<Client> clients = jsonUtils.readJSON("data/clients.json", new TypeReference<List<Client>>(){});
