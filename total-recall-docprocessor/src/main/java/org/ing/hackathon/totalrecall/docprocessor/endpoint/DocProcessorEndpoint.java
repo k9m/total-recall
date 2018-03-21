@@ -9,6 +9,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 @Slf4j
 @RestController
@@ -32,10 +34,20 @@ public class DocProcessorEndpoint {
     return null;
   }
 
-  @GetMapping("test")
-  public String test() throws IOException {
+  @GetMapping(path = "test1", produces = "image/jpeg")
+  public byte[] testImage() throws IOException {
     log.info("here");
-    return pdfToImageConverter.convertToImage();
+    return pdfToImageConverter.convertToByte();
+  }
+
+  @GetMapping(path = "test2")
+  public Map<String,String> testObject() throws IOException {
+    log.info("here");
+    Map<String,String> blah = new HashMap<>();
+
+    blah.put("test", pdfToImageConverter.convertToImage());
+
+    return blah;
   }
 
 }
