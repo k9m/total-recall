@@ -16,6 +16,7 @@ export class AppComponent implements OnInit {
     currentDocument: Document;
     currentPage: DocumentPage;
     savedDocumentsData: Map<string, string> = new Map();
+    savedDocumentsDataTabActive = false;
 
     constructor(private documentsService: DocumentsService) {}
 
@@ -118,5 +119,9 @@ export class AppComponent implements OnInit {
                     });
                 });
         }
+    }
+
+    tabSelected($event) {
+        this.savedDocumentsDataTabActive = $event.index === 1;
     }
 }

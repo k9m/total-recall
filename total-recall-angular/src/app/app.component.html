@@ -2,7 +2,7 @@
   <button *ngIf="currentDocument" (click)="saveSelectedDocument()" [disabled]="!currentDocument.changed" mat-raised-button color="primary">Save</button>
 </div>
 
-<mat-tab-group class="app-viewport">
+<mat-tab-group class="app-viewport" (selectedTabChange)="tabSelected($event)">
   <mat-tab class="app-viewport">
     <ng-template mat-tab-label>
       <div class="app-tab-label">Document masking</div>
@@ -55,7 +55,7 @@
     <ng-template mat-tab-label>
       <div class="app-tab-label">Extracted data</div>
     </ng-template>
-    <mat-drawer-container class="app-viewport" autosize>
+    <mat-drawer-container *ngIf="savedDocumentsDataTabActive" class="app-viewport" autosize>
       <mat-drawer #drawer opened class="app-viewport-sidenav" mode="side">
         <mat-accordion>
           <mat-expansion-panel *ngFor="let document of documents"
@@ -77,10 +77,6 @@
       </mat-drawer>
 
       <div>
-        <button type="button" mat-button (click)="drawer.toggle()">
-          Toggle sidenav
-        </button>
-
         <pre mwlHighlightJs [source]="currentDocument && savedDocumentsData.get(currentDocument.documentId) || ''" language="json"></pre>
       </div>
     </mat-drawer-container>
