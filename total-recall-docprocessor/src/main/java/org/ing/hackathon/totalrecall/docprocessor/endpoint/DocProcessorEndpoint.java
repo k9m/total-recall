@@ -2,6 +2,7 @@ package org.ing.hackathon.totalrecall.docprocessor.endpoint;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.ing.hackathon.totalrecall.docprocessor.model.DocumentMasking;
 import org.ing.hackathon.totalrecall.docprocessor.model.docprocessor.Document;
 import org.ing.hackathon.totalrecall.docprocessor.model.docprocessor.ParsingContext;
 import org.ing.hackathon.totalrecall.docprocessor.nlp.BasicNlpClassifier;
@@ -13,10 +14,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 @Slf4j
 @RestController
@@ -44,6 +49,32 @@ public class DocProcessorEndpoint {
 
     final Document document = documentRepository.findById(documentId).orElse(null);
     return pdfToImageConverter.convert(document.getDocument(), pageNumber);
+  }
+
+  @PutMapping(path = "/documents/{documentId}/masking")
+  public void saveMasks(
+      @PathVariable final String documentId,
+      @RequestBody final DocumentMasking documentMasking
+  ) {
+    final Document document = documentRepository.findById(documentId).orElse(null);
+    final Map<String, String> data = new HashMap<>();
+
+    documentMasking.getPageMasking().forEach(pageMasking -> {
+      pageMasking.getRegions().forEach(region -> {
+        try {
+          data.put(region.getField(), pdfParser.parse(document.getDocument(), ParsingContext.builder()
+            .lowerLeftX((float) region.getX1())
+            .lowerLeftY((float) region.getY1())
+            .upperRightX((float) region.getX2())
+            .upperRightY((float) region.getY2())
+            .pageNr(pageMasking.getPageNumber() + 1)
+            .build())
+          );
+        } catch (IOException exception) {
+          data.put(region.getField(), "ERROR");
+        }
+      });
+    });
   }
 
   @GetMapping(path = "/parse-document/{documentId}/{pageNumber}", produces = "text/plain")
