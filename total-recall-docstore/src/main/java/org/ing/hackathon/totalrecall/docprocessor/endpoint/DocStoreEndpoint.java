@@ -6,11 +6,8 @@ import org.ing.hackathon.totalrecall.docprocessor.model.docstore.DocWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.OffsetDateTime;
-import java.util.UUID;
-
 @RestController
-@RequestMapping(value = "/docstore")
+@RequestMapping(value = "/")
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class DocStoreEndpoint {
 
@@ -20,12 +17,8 @@ public class DocStoreEndpoint {
   @RequestMapping(value = "save/{typeName}", method = RequestMethod.POST)
   public void saveDoc(
           @PathVariable final String typeName,
-          @RequestBody final Object document){
-    elasticClient.saveDoc(DocWrapper.builder()
-            .id(UUID.randomUUID().toString())
-            .timeStamp(OffsetDateTime.now())
-            .document(document)
-            .build(), typeName);
+          @RequestBody final DocWrapper document){
+    elasticClient.saveDoc(document, typeName);
   }
 
   @RequestMapping(value = "get/{typeName}/{id}", method = RequestMethod.GET)

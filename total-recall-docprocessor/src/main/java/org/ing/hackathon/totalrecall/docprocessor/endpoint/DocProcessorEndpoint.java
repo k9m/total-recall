@@ -5,21 +5,18 @@ import lombok.extern.slf4j.Slf4j;
 import org.ing.hackathon.totalrecall.docprocessor.model.DocumentMasking;
 import org.ing.hackathon.totalrecall.docprocessor.model.docprocessor.Document;
 import org.ing.hackathon.totalrecall.docprocessor.model.docprocessor.ParsingContext;
+import org.ing.hackathon.totalrecall.docprocessor.model.docstore.DocWrapper;
 import org.ing.hackathon.totalrecall.docprocessor.nlp.BasicNlpClassifier;
 import org.ing.hackathon.totalrecall.docprocessor.repo.DocumentRepository;
+import org.ing.hackathon.totalrecall.docprocessor.rest.RestClient;
 import org.ing.hackathon.totalrecall.docprocessor.service.PdfParser;
 import org.ing.hackathon.totalrecall.docprocessor.service.PdfToImageConverter;
 import org.k9m.k9nlp.model.document.DocumentProfile;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.time.OffsetDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -41,6 +38,9 @@ public class DocProcessorEndpoint {
 
   @Autowired
   private BasicNlpClassifier nlpClassifier;
+
+  @Autowired
+  private final RestClient restClient;
 
   @GetMapping(path = "/document-images/{documentId}/{pageNumber}", produces = "image/jpeg")
   public byte[] getDocumentImages(
@@ -77,24 +77,15 @@ public class DocProcessorEndpoint {
         }
       });
     });
-  }
 
-  @GetMapping(path = "/parse-document/{documentId}/{pageNumber}", produces = "text/plain")
-  public String parseDocument(
-          @PathVariable final String documentId,
-          @PathVariable final Integer pageNumber) throws IOException {
+    final DocWrapper<Map<String,String>> docWrapper = DocWrapper.<Map<String,String>>builder()
+            .id(documentId)
+            .timeStamp(OffsetDateTime.now())
+            .document(data)
+            .build();
 
-    final Document document = documentRepository.findById(documentId).orElse(null);
+    restClient.post("http://localhost:9801/save/" + documentMasking.getType().toLowerCase(), docWrapper, Object.class);
 
-    final String parsedText = pdfParser.parse(document.getDocument(), ParsingContext.builder()
-            .lowerLeftX(36f)
-            .lowerLeftY(750f)
-            .upperRightX(559f)
-            .upperRightY(806f)
-            .pageNr(pageNumber)
-            .build());
-
-    return parsedText;
   }
 
   @GetMapping(path = "/parse-page/{documentId}/{pageNumber}", produces = "text/plain")
@@ -106,7 +97,7 @@ public class DocProcessorEndpoint {
 
     final String parsedText = pdfParser.parseWholePage(document.getDocument(), pageNumber);
 
-    return parsedText.replace("[^A-Za-z0-9]", "");
+    return parsedText;
   }
 
   @GetMapping(path = "/extract-entities/{documentId}/{pageNumber}")
