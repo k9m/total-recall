@@ -21,7 +21,7 @@ export class AppComponent implements OnInit {
     ngOnInit() {
         this.documentsService.getDocuments().subscribe(data => {
             this.documents = data._embedded.documents.map(item => new Document(
-                item.documentId, item.fileName, Array.apply(null, {length: item.documentMetaData.nrPages})
+                item.documentId, item.documentType, item.fileName, Array.apply(null, {length: item.documentMetaData.nrPages})
                     .map(Number.call, Number)
                     .map(number => new DocumentPage(
                         "http://localhost:9802/document-images/" + item.documentId + "/" + number, number, new Mask([])

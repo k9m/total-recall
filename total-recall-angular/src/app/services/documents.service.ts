@@ -16,6 +16,10 @@ export class DocumentsService {
         return this.http.get("http://localhost:9802/documents");
     }
 
+    getDocumentData(documentType: string, documentId: string): Observable<any> {
+        return this.http.get("http://localhost:9300/get/" + documentType + "/" + documentId);
+    }
+
     saveDocumentMasks(documentId: string, masking): Observable<any> {
         return this.http.put("http://localhost:9802/documents/" + documentId + "/masking", masking);
     }
