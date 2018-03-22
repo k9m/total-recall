@@ -17,7 +17,7 @@ export class DocumentsService {
     }
 
     getDocumentData(documentType: string, documentId: string): Observable<any> {
-        return this.http.get("http://localhost:9300/get/" + documentType + "/" + documentId);
+        return this.http.get("http://localhost:9801/get/" + documentType + "/" + documentId);
     }
 
     saveDocumentMasks(documentId: string, masking): Observable<any> {
