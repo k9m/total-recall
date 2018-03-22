@@ -3,19 +3,21 @@ import {Document} from "../model/document";
 import {DocumentPage} from "../model/document-page";
 import {Mask} from "../model/mask";
 import {Region} from "../model/Region";
+import {HttpClient} from "@angular/common/http";
+import {Observable} from "rxjs/Observable";
 
 @Injectable()
 export class DocumentsService {
 
-  constructor() { }
+    constructor(private http: HttpClient) {
+    }
 
-  getDocument() {
-    return new Document([
-        new DocumentPage("/assets/document.png", 1, new Mask([
-        ])),
-        new DocumentPage("/assets/document.png", 2, new Mask([
-        ]))
-    ])
-  }
+    getDocuments(): Observable<any> {
+        return this.http.get("http://localhost:9802/documents");
+    }
+
+    saveDocumentMasks(documentId: string, masking): Observable<any> {
+        return this.http.put("http://localhost:9802/documents/" + documentId + "/masking", masking);
+    }
 
 }

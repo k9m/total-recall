@@ -2,3 +2,35 @@
     height: 100%;
     display: block;
 }
+
+.app-actions {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    z-index: 2;
+
+    padding: 5px 15px;
+}
+
+.app-viewport {
+    height: 100%;
+}
+
+.app-viewport-sidenav {
+    background-color: #EEEEEE;
+
+    width: 300px;
+}
+
+.app-tab-label {
+    width: 252px;
+}
+
+.app-document-item {
+    background-color: #EEEEEE;
+}
+
+.app-document-item-header,
+.app-document-item-header:hover {
+    background-color: #FFFFFF !important;
+}

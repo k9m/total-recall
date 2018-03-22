@@ -7,10 +7,11 @@ import { RegionMarkerComponent } from './components/region-marker/region-marker.
 import { DocumentPageComponent } from './components/document-page/document-page.component';
 import {DocumentsService} from "./services/documents.service";
 import { DocumentComponent } from './components/document/document.component';
-import {MatSidenavModule} from "@angular/material";
+import {MatButtonModule, MatExpansionModule, MatSidenavModule, MatTabsModule} from "@angular/material";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { DocumentPageThumbComponent } from './components/document-page-thumb/document-page-thumb.component';
 import {AutoSizeInputModule} from "ngx-autosize-input";
+import {HttpClientModule} from "@angular/common/http";
 
 
 @NgModule({
@@ -25,7 +26,11 @@ import {AutoSizeInputModule} from "ngx-autosize-input";
     BrowserModule,
     BrowserAnimationsModule,
     MatSidenavModule,
-    AutoSizeInputModule
+    MatTabsModule,
+    MatExpansionModule,
+    MatButtonModule,
+    AutoSizeInputModule,
+    HttpClientModule
   ],
   providers: [DocumentsService],
   bootstrap: [AppComponent]

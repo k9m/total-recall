@@ -4,6 +4,7 @@ import {Document} from "./model/document";
 import {DocumentPage} from "./model/document-page";
 import {Region} from "./model/Region";
 import {RegionMarkerComponent} from "./components/region-marker/region-marker.component";
+import {Mask} from "./model/mask";
 
 @Component({
     selector: 'app-root',
@@ -11,14 +12,22 @@ import {RegionMarkerComponent} from "./components/region-marker/region-marker.co
     styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-    document: Document;
+    documents: Array<Document>;
+    currentDocument: Document;
     currentPage: DocumentPage;
 
     constructor(private documentsService: DocumentsService) {}
 
     ngOnInit() {
-        this.document = this.documentsService.getDocument();
-        this.currentPage = this.document.pages[0];
+        this.documentsService.getDocuments().subscribe(data => {
+            this.documents = data._embedded.documents.map(item => new Document(
+                item.documentId, item.fileName, Array.apply(null, {length: item.documentMetaData.nrPages})
+                    .map(Number.call, Number)
+                    .map(number => new DocumentPage(
+                        "http://localhost:9802/document-images/" + item.documentId + "/" + number, number, new Mask([])
+                    ))
+            ));
+        });
     }
 
     updateRegion(region: Region, marker: RegionMarkerComponent) {
@@ -34,14 +43,76 @@ export class AppComponent implements OnInit {
             region.top = marker.top;
             region.width = marker.width;
             region.height = marker.height;
+
+            if (this.currentDocument) {
+                this.currentDocument.changed = true;
+            }
+            if (this.currentPage) {
+                this.currentPage.changed = true;
+            }
         }
     }
 
     addRegion(region: Region) {
-        this.currentPage.mask.regions.push(region);
+        if (this.currentPage) {
+            this.currentPage.mask.regions.push(region);
+        }
+        if (this.currentDocument) {
+            this.currentDocument.changed = true;
+        }
     }
 
     removeRegion(region: Region) {
-        this.currentPage.mask.regions.splice(this.currentPage.mask.regions.indexOf(region), 1);
+        if (this.currentPage) {
+            this.currentPage.mask.regions.splice(this.currentPage.mask.regions.indexOf(region), 1);
+        }
+        if (this.currentDocument) {
+            this.currentDocument.changed = true;
+        }
+    }
+
+    deselectDocument(document: Document) {
+        if (this.currentDocument === document) {
+            this.currentDocument = null;
+            this.currentPage = null;
+        }
+    }
+
+    selectDocument(document: Document) {
+        this.currentDocument = document;
+        this.currentPage = document.pages[0];
+    }
+
+    updatePageSize(page: DocumentPage, width: number, height: number) {
+        console.log(page, width, height);
+        page.width = width;
+        page.height = height;
+    }
+
+    saveSelectedDocument() {
+        if (this.currentDocument) {
+            let document = this.currentDocument;
+
+            this.documentsService.saveDocumentMasks(document.documentId, {
+                pageMasking: this.currentDocument.pages.filter(page => page.changed).map(page => ({
+                    pageNumber: page.pageNr,
+                    pageWidth: page.width,
+                    pageHeight: page.height,
+                    regions: page.mask.regions.map(region => ({
+                        field: region.field,
+                        x1: region.left,
+                        y1: region.top + region.height,
+                        x2: region.left + region.width,
+                        y2: region.top
+                    }))
+                }))
+            })
+                .subscribe(() => {
+                    document.changed = false;
+                    document.pages.forEach(
+                        page => page.changed = false
+                    );
+                });
+        }
     }
 }

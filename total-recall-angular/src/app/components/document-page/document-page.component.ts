@@ -22,6 +22,7 @@ class RegionCreationState {
 export class DocumentPageComponent {
     @Input() imageUri: string;
     @Output() newRegion = new EventEmitter<any>();
+    @Output() load = new EventEmitter<any>();
     regionCreationState: RegionCreationState;
 
     startCreating(event: MouseEvent) {
@@ -55,5 +56,12 @@ export class DocumentPageComponent {
     @HostListener('document:mouseup', ['$event'])
     mouseEnd() {
         this.regionCreationState = null;
+    }
+
+    loaded($event) {
+        this.load.emit({
+            width: $event.target.offsetWidth,
+            height: $event.target.offsetHeight
+        });
     }
 }

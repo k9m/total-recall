@@ -1,19 +1,60 @@
-<app-document>
-  <app-document-page-thumb *ngFor="let page of document.pages"
-                           [pageImageUri]="page.pageImageUri"
-                           [pageNr]="page.pageNr"
-                           (select)="currentPage = page">
+<div class="app-actions">
+  <button *ngIf="currentDocument" (click)="saveSelectedDocument()" [disabled]="!currentDocument.changed" mat-raised-button color="primary">Save</button>
+</div>
 
-  </app-document-page-thumb>
-  <app-document-page [imageUri]="currentPage.pageImageUri" (newRegion)="addRegion($event)">
-    <app-region-marker *ngFor="let region of currentPage.mask.regions"
-                       [left]="region.left"
-                       [top]="region.top"
-                       [width]="region.width"
-                       [height]="region.height"
-                       [field]="region.field"
-                       (change)="updateRegion(region, $event)"
-                       (removal)="removeRegion(region)">
-    </app-region-marker>
-  </app-document-page>
-</app-document>
+<mat-tab-group class="app-viewport">
+  <mat-tab class="app-viewport">
+    <ng-template mat-tab-label>
+      <div class="app-tab-label">Scanned documents</div>
+    </ng-template>
+    <mat-drawer-container class="app-viewport" autosize>
+      <mat-drawer #drawer opened class="app-viewport-sidenav" mode="side">
+        <mat-accordion>
+          <mat-expansion-panel *ngFor="let document of documents"
+                               [expanded]="currentDocument === document"
+                               (closed)="deselectDocument(document)"
+                               (opened)="selectDocument(document)"
+                               class="app-document-item">
+            <mat-expansion-panel-header class="app-document-item-header">
+              <mat-panel-title>{{document.fileName}}</mat-panel-title>
+            </mat-expansion-panel-header>
+            <app-document-page-thumb *ngFor="let page of document.pages"
+                                     [pageImageUri]="page.pageImageUri"
+                                     [pageNr]="page.pageNr + 1"
+                                     (select)="currentPage = page">
+
+            </app-document-page-thumb>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </mat-drawer>
+
+      <div>
+        <!--button type="button" mat-button (click)="drawer.toggle()">
+          Toggle sidenav
+        </button-->
+
+        <app-document-page *ngIf="currentPage"
+                           [imageUri]="currentPage.pageImageUri"
+                           (newRegion)="addRegion($event)"
+                           (load)="updatePageSize(currentPage, $event.width, $event.height)">
+          <app-region-marker *ngFor="let region of currentPage.mask.regions"
+                             [left]="region.left"
+                             [top]="region.top"
+                             [width]="region.width"
+                             [height]="region.height"
+                             [field]="region.field"
+                             (change)="updateRegion(region, $event)"
+                             (removal)="removeRegion(region)">
+          </app-region-marker>
+        </app-document-page>
+
+      </div>
+    </mat-drawer-container>
+
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <div class="app-tab-label">Extracted data</div>
+    </ng-template>
+  </mat-tab>
+</mat-tab-group>
