@@ -101,9 +101,9 @@ export class AppComponent implements OnInit {
                     regions: page.mask.regions.map(region => ({
                         field: region.field,
                         x1: region.left,
-                        y1: region.top + region.height,
+                        y1: region.top,
                         x2: region.left + region.width,
-                        y2: region.top
+                        y2: region.top + region.height
                     }))
                 }))
             })
