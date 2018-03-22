@@ -84,6 +84,8 @@ public class DocProcessorEndpoint {
             .document(data)
             .build();
 
+    log.info("Saving Document");
+
     restClient.post("http://localhost:9801/save/" + documentMasking.getType().toLowerCase(), docWrapper, Object.class);
 
   }
