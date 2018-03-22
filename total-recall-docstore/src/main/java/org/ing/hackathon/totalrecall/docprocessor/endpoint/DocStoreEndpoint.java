@@ -3,6 +3,7 @@ package org.ing.hackathon.totalrecall.docprocessor.endpoint;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.ing.hackathon.totalrecall.docprocessor.config.elastic.ElasticClientImpl;
+import org.ing.hackathon.totalrecall.docprocessor.model.docprocessor.masking.DocumentMasking;
 import org.ing.hackathon.totalrecall.docprocessor.model.docstore.DocWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -31,6 +32,12 @@ public class DocStoreEndpoint {
           @PathVariable final String id){
     log.info("Get document {},{}", typeName, id);
     return elasticClient.getDoc(id, typeName.toLowerCase());
+  }
+
+  @RequestMapping(value = "save-mask", method = RequestMethod.POST)
+  public void saveMask(@RequestBody final DocumentMasking mask){
+    log.info("Save mask {}", mask.getPageMasking());
+    elasticClient.saveMask(mask);
   }
 
   @RequestMapping(value = "deleteIndex/{typeName}", method = RequestMethod.GET)

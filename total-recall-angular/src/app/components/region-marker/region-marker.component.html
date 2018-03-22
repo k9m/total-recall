@@ -1,5 +1,5 @@
 <div class="app-region-marker-title" [style.left.px]="left" [style.top.px]="top">
-  <input type="text" class="app-region-marker-input" AutoSizeInput [value]="field" (input)="updateField($event.target.value)" />
+  <input type="text" class="app-region-marker-input" AutoSizeInput [value]="field" (input)="updateField($event.target.value)" appAutofocus />
   <span class="app-region-marker-close" (click)="remove()">x</span>
 </div>
 <div class="app-region-marker" [style.left.px]="left" [style.top.px]="top" [style.width.px]="width" [style.height.px]="height" (mousedown)="startDragging($event)">

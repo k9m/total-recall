@@ -1,4 +1,4 @@
-package org.ing.hackathon.totalrecall.docprocessor.model;
+package org.ing.hackathon.totalrecall.docprocessor.model.docprocessor.masking;
 
 import lombok.Data;
 

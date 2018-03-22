@@ -12,6 +12,7 @@ import org.elasticsearch.client.Client;
 import org.elasticsearch.common.xcontent.XContentType;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.search.sort.SortOrder;
+import org.ing.hackathon.totalrecall.docprocessor.model.docprocessor.masking.DocumentMasking;
 import org.ing.hackathon.totalrecall.docprocessor.model.docstore.DocWrapper;
 import org.ing.hackathon.totalrecall.docprocessor.model.docstore.SearchResults;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +45,21 @@ public class ElasticClientImpl implements ElasticClient {
       client.prepareIndex(typeName, article.getId())
               .setType(typeName)
               .setId(article.getId())
+              .setSource(articleJsonString, XContentType.JSON)
+              .get();
+    } catch (JsonProcessingException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
+  @Override
+  public void saveMask(final DocumentMasking article) {
+    final String articleJsonString;
+    try {
+      articleJsonString = objectMapper.writeValueAsString(article);
+      client.prepareIndex("mask", "mask")
+              .setType(article.getType())
+              .setId(article.getType())
               .setSource(articleJsonString, XContentType.JSON)
               .get();
     } catch (JsonProcessingException e) {

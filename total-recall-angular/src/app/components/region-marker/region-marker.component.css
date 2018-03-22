@@ -11,8 +11,9 @@
     border-top-right-radius: 3px;
 
     position: absolute;
-    margin-top: -26px;
+    margin-top: -34px;
     min-width: 50px;
+    min-height: 34px;
 }
 
 .app-region-marker-input {
@@ -20,6 +21,7 @@
     outline: none;
     border: none;
     color: #FFFFFF;
+    font-size: 19px;
 
     padding: 5px;
 
@@ -28,8 +30,9 @@
 
 .app-region-marker-close {
     display: inline-block;
+    vertical-align: top;
     padding: 3px 5px;
-    margin: 4px 6px;
+    margin: 8px 6px;
     line-height: 10px;
 
     border: solid 1px #FFFFFF;
