@@ -14,6 +14,7 @@ import {Mask} from "./model/mask";
 export class AppComponent implements OnInit {
     documents: Array<Document>;
     currentDocument: Document;
+    currentDocumentData: Object;
     currentPage: DocumentPage;
 
     constructor(private documentsService: DocumentsService) {}
@@ -81,10 +82,12 @@ export class AppComponent implements OnInit {
     selectDocument(document: Document) {
         this.currentDocument = document;
         this.currentPage = document.pages[0];
+        this.documentsService.getDocumentData(document.documentType, document.documentId).subscribe(data => {
+            this.currentDocumentData = data;
+        });
     }
 
     updatePageSize(page: DocumentPage, width: number, height: number) {
-        console.log(page, width, height);
         page.width = width;
         page.height = height;
     }
@@ -94,6 +97,7 @@ export class AppComponent implements OnInit {
             let document = this.currentDocument;
 
             this.documentsService.saveDocumentMasks(document.documentId, {
+                type: document.documentType,
                 pageMasking: this.currentDocument.pages.filter(page => page.changed).map(page => ({
                     pageNumber: page.pageNr,
                     pageWidth: page.width,
