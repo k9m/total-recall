@@ -25,13 +25,19 @@ public class Initialiser {
 
   @PostConstruct
   public void init(){
-    final byte[] financialStatements = fileUtils.getBytesForFile("sample/financial-statements.pdf");
-    final String documentId = "f9067827-d579-460d-9307-ae6fa41f6379";
+    fileUtils.listFilesOnClasspath("classpath:sample/*.pdf").forEach(f -> insertDocument("sample", f));
+    fileUtils.listFilesOnClasspath("classpath:sample-ignored/*.pdf").forEach(f -> insertDocument("sample-ignored", f));
+  }
+
+  private void insertDocument(final String folder, final String fileName){
+    final String[] fileBits = fileName.split("_");
+    final byte[] financialStatements = fileUtils.getBytesForFile(folder + "/" + fileName);
+    final String documentId = fileBits[2].split("\\.")[0];
     final Document document = Document.builder()
             .documentId(documentId)
-            .documentType("FINANCIAL-STATEMENT")
-            .fileName("financial-statements.pdf")
-            .clientId(1L)
+            .documentType(fileBits[1])
+            .fileName(fileName)
+            .clientId(Long.parseLong(fileBits[0]))
             .document(financialStatements)
             .build();
 
@@ -39,7 +45,6 @@ public class Initialiser {
     document.setDocumentMetaData(documentMetaData);
     documentMetaData.setDocument(document);
 
-     documentRepository.save(document);
-
+    documentRepository.save(document);
   }
 }
