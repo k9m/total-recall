@@ -81,7 +81,7 @@
           Toggle sidenav
         </button>
 
-        <pre>{{currentDocumentData}}</pre>
+        <pre>{{JSON.stringify(savedDocumentsData.get(currentDocument.documentId))}}</pre>
       </div>
     </mat-drawer-container>
   </mat-tab>

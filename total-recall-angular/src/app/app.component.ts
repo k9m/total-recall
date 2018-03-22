@@ -14,8 +14,8 @@ import {Mask} from "./model/mask";
 export class AppComponent implements OnInit {
     documents: Array<Document>;
     currentDocument: Document;
-    currentDocumentData: Object;
     currentPage: DocumentPage;
+    savedDocumentsData: Map<string, Object> = new Map();
 
     constructor(private documentsService: DocumentsService) {}
 
@@ -82,9 +82,6 @@ export class AppComponent implements OnInit {
     selectDocument(document: Document) {
         this.currentDocument = document;
         this.currentPage = document.pages[0];
-        this.documentsService.getDocumentData(document.documentType, document.documentId).subscribe(data => {
-            this.currentDocumentData = data;
-        });
     }
 
     updatePageSize(page: DocumentPage, width: number, height: number) {
@@ -116,6 +113,9 @@ export class AppComponent implements OnInit {
                     document.pages.forEach(
                         page => page.changed = false
                     );
+                    this.documentsService.getDocumentData(document.documentType, document.documentId).subscribe(data => {
+                        this.savedDocumentsData.set(document.documentId, data);
+                    });
                 });
         }
     }
