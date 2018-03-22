@@ -25,13 +25,13 @@ public class Initialiser {
 
   @PostConstruct
   public void init(){
-    fileUtils.listFilesOnClasspath("classpath:sample/*.pdf").forEach(this::insertDocument);
-    fileUtils.listFilesOnClasspath("classpath:sample-ignored/*.pdf").forEach(this::insertDocument);
+    fileUtils.listFilesOnClasspath("classpath:sample/*.pdf").forEach(f -> insertDocument("sample", f));
+    fileUtils.listFilesOnClasspath("classpath:sample-ignored/*.pdf").forEach(f -> insertDocument("sample-ignored", f));
   }
 
-  private void insertDocument(final String fileName){
+  private void insertDocument(final String folder, final String fileName){
     final String[] fileBits = fileName.split("_");
-    final byte[] financialStatements = fileUtils.getBytesForFile("sample/" + fileName);
+    final byte[] financialStatements = fileUtils.getBytesForFile(folder + "/" + fileName);
     final String documentId = fileBits[2].split("\\.")[0];
     final Document document = Document.builder()
             .documentId(documentId)
