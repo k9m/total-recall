@@ -21,7 +21,10 @@
       "styles": [
         "styles.css"
       ],
-      "scripts": ["../node_modules/jquery/dist/jquery.min.js"],
+      "scripts": [
+        "../node_modules/jquery/dist/jquery.min.js",
+        "http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/languages/javascript.min.js"
+      ],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",

@@ -77,7 +77,7 @@
       </mat-drawer>
 
       <div>
-        <pre mwlHighlightJs [source]="currentDocument && savedDocumentsData.get(currentDocument.documentId) || ''" language="json"></pre>
+        <ngx-json-viewer *ngIf="currentDocument" [json]="savedDocumentsData.get(currentDocument.documentId)"></ngx-json-viewer>
       </div>
     </mat-drawer-container>
   </mat-tab>

@@ -15,7 +15,7 @@ export class AppComponent implements OnInit {
     documents: Array<Document>;
     currentDocument: Document;
     currentPage: DocumentPage;
-    savedDocumentsData: Map<string, string> = new Map();
+    savedDocumentsData: Map<string, Object> = new Map();
     savedDocumentsDataTabActive = false;
 
     constructor(private documentsService: DocumentsService) {}
@@ -115,7 +115,7 @@ export class AppComponent implements OnInit {
                         page => page.changed = false
                     );
                     this.documentsService.getDocumentData(document.documentType, document.documentId).subscribe(data => {
-                        this.savedDocumentsData.set(document.documentId, JSON.stringify(data));
+                        this.savedDocumentsData.set(document.documentId, data);
                     });
                 });
         }

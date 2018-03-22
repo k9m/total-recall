@@ -12,12 +12,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { DocumentPageThumbComponent } from './components/document-page-thumb/document-page-thumb.component';
 import {AutoSizeInputModule} from "ngx-autosize-input";
 import {HttpClientModule} from "@angular/common/http";
-import * as hljs from 'highlightjs';
-import { HighlightJsModule, HIGHLIGHT_JS } from 'angular-highlight-js';
-
-export function highlightJsFactory() {
-    return hljs;
-}
+import {NgxJsonViewerModule} from "ngx-json-viewer";
 
 @NgModule({
   declarations: [
@@ -34,12 +29,9 @@ export function highlightJsFactory() {
     MatTabsModule,
     MatExpansionModule,
     MatButtonModule,
+    NgxJsonViewerModule,
     AutoSizeInputModule,
-    HttpClientModule,
-    HighlightJsModule.forRoot({
-      provide: HIGHLIGHT_JS,
-      useFactory: highlightJsFactory
-    })
+    HttpClientModule
   ],
   providers: [DocumentsService],
   bootstrap: [AppComponent]
