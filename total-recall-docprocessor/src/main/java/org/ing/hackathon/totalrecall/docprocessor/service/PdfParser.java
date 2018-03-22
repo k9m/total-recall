@@ -15,11 +15,20 @@ public class PdfParser {
 
   public String parse(final byte[] bytes, final ParsingContext parsingContext) throws IOException {
     final PdfReader reader = new PdfReader(bytes);
+    final Rectangle pageBox = reader.getPageSize(reader.getPageN(parsingContext.getPageNr()));
+
+    final float pdfHeight = pageBox.getHeight();
+    final float pdfWidth = pageBox.getWidth();
+
+    final float heightProportion = pdfHeight / parsingContext.getHeight();
+    final float widthProportion = pdfWidth / parsingContext.getWidth();
+
+
     final Rectangle rect = new Rectangle(
-            parsingContext.getLowerLeftX(),
-            parsingContext.getLowerLeftY(),
-            parsingContext.getUpperRightX(),
-            parsingContext.getUpperRightY());
+            parsingContext.getLowerLeftX() * widthProportion,
+            parsingContext.getLowerLeftY() * heightProportion,
+            parsingContext.getUpperRightX() * widthProportion,
+            parsingContext.getUpperRightY() * heightProportion);
 
     final RenderFilter regionFilter = new RegionTextRenderFilter(rect);
 
@@ -30,6 +39,8 @@ public class PdfParser {
             parsingContext.getPageNr(),
             strategy);
     reader.close();
+
+    log.info("@@@ Text: {}", parsedText);
 
     return parsedText;
   }

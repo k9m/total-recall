@@ -14,6 +14,9 @@ public class ParsingContext {
   private Float upperRightX;
   private Float upperRightY;
 
+  private Float height;
+  private Float width;
+
   private Integer pageNr;
 
   @Tolerate

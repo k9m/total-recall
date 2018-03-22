@@ -26,7 +26,7 @@ public class Initialiser {
   @PostConstruct
   public void init(){
     fileUtils.listFilesOnClasspath("classpath:sample/*.pdf").forEach(f -> insertDocument("sample", f));
-//    fileUtils.listFilesOnClasspath("classpath:sample-ignored/*.pdf").forEach(f -> insertDocument("sample-ignored", f));
+    fileUtils.listFilesOnClasspath("classpath:sample-ignored/*.pdf").forEach(f -> insertDocument("sample-ignored", f));
   }
 
   private void insertDocument(final String folder, final String fileName){

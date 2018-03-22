@@ -64,9 +64,11 @@ public class DocProcessorEndpoint {
         try {
           data.put(region.getField(), pdfParser.parse(document.getDocument(), ParsingContext.builder()
             .lowerLeftX((float) region.getX1())
-            .lowerLeftY((float) region.getY1())
+            .lowerLeftY((float) pageMasking.getPageHeight() - region.getY2())
             .upperRightX((float) region.getX2())
-            .upperRightY((float) region.getY2())
+            .upperRightY((float) pageMasking.getPageHeight() - region.getY1())
+            .height((float) pageMasking.getPageHeight())
+            .width((float) pageMasking.getPageWidth())
             .pageNr(pageMasking.getPageNumber() + 1)
             .build())
           );

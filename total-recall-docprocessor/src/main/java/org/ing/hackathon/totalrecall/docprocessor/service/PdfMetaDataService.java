@@ -13,7 +13,7 @@ import java.io.IOException;
 public class PdfMetaDataService {
 
   public DocumentMetaData getNrPages(final byte[] sample){
-    final PDDocument document;
+    PDDocument document = null;
     try {
       document = PDDocument.load(sample);
       final PDDocumentInformation pdDocumentInformation = document.getDocumentInformation();
@@ -24,6 +24,13 @@ public class PdfMetaDataService {
                 .build();
     } catch (IOException e) {
       throw new PdfProcessingErrorException(e);
+    }
+    finally{
+      try {
+        document.close();
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
     }
   }
 }
