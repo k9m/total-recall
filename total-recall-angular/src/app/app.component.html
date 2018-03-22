@@ -81,7 +81,7 @@
           Toggle sidenav
         </button>
 
-        <pre>{{currentDocument && savedDocumentsData.get(currentDocument.documentId)}}</pre>
+        <pre mwlHighlightJs [source]="currentDocument && savedDocumentsData.get(currentDocument.documentId) || ''" language="json"></pre>
       </div>
     </mat-drawer-container>
   </mat-tab>
