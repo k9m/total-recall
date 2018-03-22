@@ -5,7 +5,7 @@
 <mat-tab-group class="app-viewport">
   <mat-tab class="app-viewport">
     <ng-template mat-tab-label>
-      <div class="app-tab-label">Scanned documents</div>
+      <div class="app-tab-label">Document masking</div>
     </ng-template>
     <mat-drawer-container class="app-viewport" autosize>
       <mat-drawer #drawer opened class="app-viewport-sidenav" mode="side">
@@ -50,11 +50,39 @@
 
       </div>
     </mat-drawer-container>
-
   </mat-tab>
   <mat-tab>
     <ng-template mat-tab-label>
       <div class="app-tab-label">Extracted data</div>
     </ng-template>
+    <mat-drawer-container class="app-viewport" autosize>
+      <mat-drawer #drawer opened class="app-viewport-sidenav" mode="side">
+        <mat-accordion>
+          <mat-expansion-panel *ngFor="let document of documents"
+                               [expanded]="currentDocument === document"
+                               (closed)="deselectDocument(document)"
+                               (opened)="selectDocument(document)"
+                               class="app-document-item">
+            <mat-expansion-panel-header class="app-document-item-header">
+              <mat-panel-title>{{document.fileName}}</mat-panel-title>
+            </mat-expansion-panel-header>
+            <app-document-page-thumb *ngFor="let page of document.pages"
+                                     [pageImageUri]="page.pageImageUri"
+                                     [pageNr]="page.pageNr + 1"
+                                     (select)="currentPage = page">
+
+            </app-document-page-thumb>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </mat-drawer>
+
+      <div>
+        <button type="button" mat-button (click)="drawer.toggle()">
+          Toggle sidenav
+        </button>
+
+        <pre>{{currentDocumentData}}</pre>
+      </div>
+    </mat-drawer-container>
   </mat-tab>
 </mat-tab-group>
