@@ -13,6 +13,7 @@ import { DocumentPageThumbComponent } from './components/document-page-thumb/doc
 import {AutoSizeInputModule} from "ngx-autosize-input";
 import {HttpClientModule} from "@angular/common/http";
 import {NgxJsonViewerModule} from "ngx-json-viewer";
+import { AutofocusDirective } from './directives/autofocus.directive';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import {NgxJsonViewerModule} from "ngx-json-viewer";
     RegionMarkerComponent,
     DocumentPageComponent,
     DocumentComponent,
-    DocumentPageThumbComponent
+    DocumentPageThumbComponent,
+    AutofocusDirective
   ],
   imports: [
     BrowserModule,
