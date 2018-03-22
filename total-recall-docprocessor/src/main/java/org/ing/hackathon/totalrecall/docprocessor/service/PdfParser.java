@@ -33,4 +33,16 @@ public class PdfParser {
 
     return parsedText;
   }
+
+  public String parseWholePage(final byte[] bytes, final Integer pageNumber) throws IOException {
+    final PdfReader reader = new PdfReader(bytes);
+    final TextExtractionStrategy strategy = new FilteredTextRenderListener(new LocationTextExtractionStrategy());
+    final String parsedText = PdfTextExtractor.getTextFromPage(
+            reader,
+            pageNumber,
+            strategy);
+    reader.close();
+
+    return parsedText;
+  }
 }

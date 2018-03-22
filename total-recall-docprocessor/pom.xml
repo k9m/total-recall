@@ -64,6 +64,11 @@
 			<version>${itext.pdf.version}</version>
 		</dependency>
 
+        <dependency>
+            <groupId>org.k9m.k9nlp</groupId>
+            <artifactId>k9nlp-tokeniser</artifactId>
+        </dependency>
+
 		<!-- https://mvnrepository.com/artifact/org.apache.pdfbox/pdfbox -->
 		<dependency>
 			<groupId>org.apache.pdfbox</groupId>
