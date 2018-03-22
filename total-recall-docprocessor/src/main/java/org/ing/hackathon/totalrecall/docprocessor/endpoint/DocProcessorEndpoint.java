@@ -2,7 +2,7 @@ package org.ing.hackathon.totalrecall.docprocessor.endpoint;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.ing.hackathon.totalrecall.docprocessor.model.DocumentMasking;
+import org.ing.hackathon.totalrecall.docprocessor.model.docprocessor.masking.DocumentMasking;
 import org.ing.hackathon.totalrecall.docprocessor.model.docprocessor.Document;
 import org.ing.hackathon.totalrecall.docprocessor.model.docprocessor.ParsingContext;
 import org.ing.hackathon.totalrecall.docprocessor.model.docstore.DocWrapper;

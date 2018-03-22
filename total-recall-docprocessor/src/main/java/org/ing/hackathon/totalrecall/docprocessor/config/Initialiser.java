@@ -36,7 +36,7 @@ public class Initialiser {
     final Document document = Document.builder()
             .documentId(documentId)
             .documentType(fileBits[1])
-            .fileName(fileName)
+            .fileName(fileBits[1])
             .clientId(Long.parseLong(fileBits[0]))
             .document(financialStatements)
             .build();
