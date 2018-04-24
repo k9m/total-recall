@@ -48,7 +48,7 @@ public class DocProcessorEndpoint {
           @PathVariable final Integer pageNumber) throws IOException {
 
     final Document document = documentRepository.findById(documentId).orElse(null);
-    return pdfToImageConverter.convert(document.getDocument(), pageNumber);
+    return document.getDocumentPages().get(pageNumber).getPageImage();
   }
 
   @PutMapping(path = "/documents/{documentId}/masking")

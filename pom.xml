@@ -23,7 +23,6 @@
 		<module>total-recall-docstore</module>
 		<module>total-recall-docprocessor</module>
 		<module>total-recall-common</module>
-		<module>total-recall-proxy</module>
 	</modules>
 
 	<properties>
@@ -57,14 +56,6 @@
 				<groupId>org.ing.hackathon.totalrecall</groupId>
 				<artifactId>total-recall-proxy</artifactId>
 				<version>${project.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>org.springframework.cloud</groupId>
-				<artifactId>spring-cloud-dependencies</artifactId>
-				<version>Brixton.SR5</version>
-				<type>pom</type>
-				<scope>import</scope>
 			</dependency>
 
 			<dependency>

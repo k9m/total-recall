@@ -20,13 +20,13 @@ services:
       - 9200:9200
       - 9300:9300
 
-  portainer:
-    image: portainer/portainer:latest
-    container_name: portainer
-    ports:
-      - "9000:9000"
-    volumes:
-      - "/var/run/docker.sock:/var/run/docker.sock"
+#  portainer:
+#    image: portainer/portainer:latest
+#    container_name: portainer
+#    ports:
+#      - "9000:9000"
+#    volumes:
+#      - "/var/run/docker.sock:/var/run/docker.sock"
 
 volumes:
   esdata:

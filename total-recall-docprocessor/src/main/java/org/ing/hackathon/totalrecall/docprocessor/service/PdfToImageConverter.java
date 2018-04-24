@@ -3,8 +3,10 @@ package org.ing.hackathon.totalrecall.docprocessor.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDDocumentInformation;
 import org.apache.pdfbox.rendering.ImageType;
 import org.apache.pdfbox.rendering.PDFRenderer;
+import org.ing.hackathon.totalrecall.docprocessor.model.docprocessor.DocumentPages;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,8 +20,11 @@ import java.io.IOException;
 @Service
 public class PdfToImageConverter {
 
-  public byte[] convert(final byte[] sample, final int page) throws IOException {
-    final PDDocument document = PDDocument.load(sample);
+  public byte[] convert(final byte[] pdfBytes, final int page) throws IOException {
+    return convert(PDDocument.load(pdfBytes), page);
+  }
+
+  public byte[] convert(final PDDocument document, final int page) throws IOException {
     final PDFRenderer pdfRenderer = new PDFRenderer(document);
     final BufferedImage bim = pdfRenderer.renderImageWithDPI(page, 300, ImageType.RGB);
 
@@ -28,8 +33,6 @@ public class PdfToImageConverter {
     baos.flush();
     final byte[] imageBytes = baos.toByteArray();
     baos.close();
-
-    document.close();
 
     return imageBytes;
   }
