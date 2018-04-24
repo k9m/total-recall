@@ -5,6 +5,7 @@ import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.parser.*;
 import lombok.extern.slf4j.Slf4j;
 import org.ing.hackathon.totalrecall.docprocessor.model.docprocessor.ParsingContext;
+import org.ing.hackathon.totalrecall.docprocessor.model.docprocessor.masking.DataRegion;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -56,4 +57,10 @@ public class PdfParser {
 
     return parsedText;
   }
+
+  public String ocrPdf(final byte[] bytes, final int pageIndex, final DataRegion region) {
+    //TODO
+    return null;
+  }
+
 }

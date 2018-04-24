@@ -62,6 +62,7 @@ public class DocProcessorEndpoint {
     documentMasking.getPageMasking().forEach(pageMasking -> {
       pageMasking.getRegions().forEach(region -> {
         try {
+          log.info(pageMasking.toString());
           data.put(region.getField(), pdfParser.parse(document.getDocument(), ParsingContext.builder()
             .lowerLeftX((float) region.getX1())
             .lowerLeftY((float) pageMasking.getPageHeight() - region.getY2())
@@ -77,6 +78,28 @@ public class DocProcessorEndpoint {
         }
       });
     });
+
+    final DocWrapper<Map<String,String>> docWrapper = DocWrapper.<Map<String,String>>builder()
+            .id(documentId)
+            .timeStamp(OffsetDateTime.now())
+            .document(data)
+            .build();
+
+    log.info("Saving Document");
+
+    restClient.post("http://localhost:9801/save/" + documentMasking.getType().toLowerCase(), docWrapper, Object.class);
+
+  }
+
+  @PutMapping(path = "/documents/{documentId}/ocr")
+  public void ocr(
+          @PathVariable final String documentId,
+          @RequestBody final DocumentMasking documentMasking
+  ) {
+    final Document document = documentRepository.findById(documentId).orElse(null);
+    final Map<String, String> data = new HashMap<>();
+
+    documentMasking.getPageMasking().forEach(pageMasking -> pageMasking.getRegions().forEach(region -> data.put(region.getField(), pdfParser.ocrPdf(document.getDocument(), pageMasking.getPageNumber(), region))));
 
     final DocWrapper<Map<String,String>> docWrapper = DocWrapper.<Map<String,String>>builder()
             .id(documentId)

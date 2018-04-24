@@ -35,28 +35,4 @@ public class PdfToImageConverter {
   }
 
 
-//    PdfReader reader = new PdfReader(sample);
-//    reader.getPageN(1);
-//    PdfPage origPage = origPdf.getPageNumber();
-
-
-//    Rectangle rect = origPage.getPageSize();
-//    Document document = new Document(writerDoc);
-//    Table wrapperTable = new Table(1);
-//    Table containerTable = new Table(new float[]{0.5f,0.5f});
-//    containerTable.setWidthPercent(100);
-//    containerTable.addCell( "col1");
-//    containerTable.addCell("col2");
-//
-//    PdfFormXObject pageCopy = origPage.copyAsFormXObject(writerDoc);
-//    Image image = new Image(pageCopy);
-//    image.setBorder(Border.NO_BORDER);
-//    image.setAutoScale(true);
-//    image.setHeight(rect.getHeight()-250);
-//    wrapperTable.addCell(new Cell().add(containerTable).setBorder(Border.NO_BORDER));
-//    wrapperTable.addCell(new Cell().add(image).setBorder(Border.NO_BORDER));
-//    document.add(wrapperTable);
-//    document.close();
-//    readerDoc.close();
-
 }
