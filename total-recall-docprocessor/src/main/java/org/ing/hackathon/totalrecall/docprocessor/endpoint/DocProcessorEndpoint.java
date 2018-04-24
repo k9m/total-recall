@@ -9,8 +9,9 @@ import org.ing.hackathon.totalrecall.docprocessor.model.docstore.DocWrapper;
 import org.ing.hackathon.totalrecall.docprocessor.nlp.BasicNlpClassifier;
 import org.ing.hackathon.totalrecall.docprocessor.repo.DocumentRepository;
 import org.ing.hackathon.totalrecall.docprocessor.rest.RestClient;
-import org.ing.hackathon.totalrecall.docprocessor.service.PdfParser;
-import org.ing.hackathon.totalrecall.docprocessor.service.PdfToImageConverter;
+import org.ing.hackathon.totalrecall.docprocessor.service.ocr.OcrService;
+import org.ing.hackathon.totalrecall.docprocessor.service.pdf.PdfParser;
+import org.ing.hackathon.totalrecall.docprocessor.service.pdf.PdfToImageConverter;
 import org.k9m.k9nlp.model.document.DocumentProfile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -37,6 +38,9 @@ public class DocProcessorEndpoint {
   public PdfParser pdfParser;
 
   @Autowired
+  public OcrService ocrService;
+
+  @Autowired
   private BasicNlpClassifier nlpClassifier;
 
   @Autowired
@@ -51,7 +55,7 @@ public class DocProcessorEndpoint {
     return document.getDocumentPages().get(pageNumber).getPageImage();
   }
 
-  @PutMapping(path = "/documents/{documentId}/masking")
+  @PutMapping(path = "/documents/{documentId}/pdf")
   public void saveMasks(
       @PathVariable final String documentId,
       @RequestBody final DocumentMasking documentMasking
@@ -99,7 +103,14 @@ public class DocProcessorEndpoint {
     final Document document = documentRepository.findById(documentId).orElse(null);
     final Map<String, String> data = new HashMap<>();
 
-    documentMasking.getPageMasking().forEach(pageMasking -> pageMasking.getRegions().forEach(region -> data.put(region.getField(), pdfParser.ocrPdf(document.getDocument(), pageMasking.getPageNumber(), region))));
+    documentMasking.getPageMasking().forEach(
+            pageMasking -> pageMasking.getRegions().forEach(
+                    region -> data.put(
+                            region.getField(),
+                            ocrService.process(
+                                    document.getDocumentPages().get(pageMasking.getPageNumber()).getPageImage(),
+                                    pageMasking,
+                                    region))));
 
     final DocWrapper<Map<String,String>> docWrapper = DocWrapper.<Map<String,String>>builder()
             .id(documentId)

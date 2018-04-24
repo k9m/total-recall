@@ -1,4 +1,4 @@
-package org.ing.hackathon.totalrecall.docprocessor.service;
+package org.ing.hackathon.totalrecall.docprocessor.service.pdf;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.pdfbox.pdmodel.PDDocument;
@@ -11,8 +11,6 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.UUID;
 
 @Slf4j

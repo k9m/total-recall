@@ -90,11 +90,11 @@ export class AppComponent implements OnInit {
         page.height = height;
     }
 
-    saveSelectedDocument() {
+    saveSelectedDocument(type: string) {
         if (this.currentDocument) {
             let document = this.currentDocument;
 
-            this.documentsService.saveDocumentMasks(document.documentId, {
+            this.documentsService.saveDocumentMasks(type, document.documentId, {
                 type: document.documentType,
                 pageMasking: this.currentDocument.pages.filter(page => page.changed).map(page => ({
                     pageNumber: page.pageNr,

@@ -1,4 +1,4 @@
-package org.ing.hackathon.totalrecall.docprocessor.service;
+package org.ing.hackathon.totalrecall.docprocessor.service.pdf;
 
 import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.pdf.PdfReader;
@@ -56,11 +56,6 @@ public class PdfParser {
     reader.close();
 
     return parsedText;
-  }
-
-  public String ocrPdf(final byte[] bytes, final int pageIndex, final DataRegion region) {
-    //TODO
-    return null;
   }
 
 }

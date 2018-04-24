@@ -1,5 +1,6 @@
 <div class="app-actions">
-  <button *ngIf="currentDocument" (click)="saveSelectedDocument()" [disabled]="!currentDocument.changed" mat-raised-button color="primary">Save</button>
+  <button *ngIf="currentDocument" (click)="saveSelectedDocument('pdf')" [disabled]="!currentDocument.changed" mat-raised-button color="primary">PDF</button>
+  <button *ngIf="currentDocument" (click)="saveSelectedDocument('ocr')" [disabled]="!currentDocument.changed" mat-raised-button color="primary">OCR</button>
 </div>
 
 <mat-tab-group class="app-viewport" (selectedTabChange)="tabSelected($event)">

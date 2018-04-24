@@ -1,4 +1,4 @@
-package org.ing.hackathon.totalrecall.docprocessor.service;
+package org.ing.hackathon.totalrecall.docprocessor.service.pdf;
 
 import java.io.IOException;
 

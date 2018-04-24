@@ -2,10 +2,11 @@ package org.ing.hackathon.totalrecall.docprocessor.config;
 
 import lombok.extern.slf4j.Slf4j;
 import org.ing.hackathon.totalrecall.docprocessor.repo.DocumentRepository;
-import org.ing.hackathon.totalrecall.docprocessor.service.PdfMetaDataService;
+import org.ing.hackathon.totalrecall.docprocessor.service.pdf.PdfMetaDataService;
 import org.ing.hackathon.totalrecall.docprocessor.util.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 
 import javax.annotation.PostConstruct;
 
@@ -25,11 +26,15 @@ public class Initialiser {
 
   @PostConstruct
   public void init(){
-    fileUtils.listFilesOnClasspath("classpath:sample/*.pdf").forEach(f -> insertDocument("sample", f));
+    loadFilesInFolder("sample");
+    loadFilesInFolder("sample-ignored");
+  }
+
+  private void loadFilesInFolder(final String folderName){
     try {
-      fileUtils.listFilesOnClasspath("classpath:sample-ignored/*.pdf").forEach(f -> insertDocument("sample-ignored", f));
+      fileUtils.listFilesOnClasspath("classpath:" + folderName + "/*.pdf").forEach(f -> insertDocument(folderName, f));
     } catch (Exception e) {
-      log.warn("No ignored folder found!");
+      log.warn(folderName + " folder found!");
     }
   }
 
