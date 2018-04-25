@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class DataRegion {
+  private boolean nlp;
   private String field;
   private int x1;
   private int y1;
