@@ -22,6 +22,7 @@ import javax.annotation.PreDestroy;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 
@@ -53,6 +54,22 @@ public class ElasticClientImpl implements ElasticClient {
   }
 
   @Override
+  public void saveAny(String id, String typeName, Object blob) {
+    final String articleJsonString;
+    try {
+      articleJsonString = objectMapper.writeValueAsString(blob);
+      client.prepareIndex(typeName, id)
+              .setType(typeName)
+              .setId(id)
+              .setSource(articleJsonString, XContentType.JSON)
+              .get();
+    } catch (JsonProcessingException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
+
+  @Override
   public void saveMask(final DocumentMasking article) {
     final String articleJsonString;
     try {
@@ -75,6 +92,25 @@ public class ElasticClientImpl implements ElasticClient {
     if(response.isExists()){
       try {
         article = objectMapper.readValue(response.getSourceAsString(), DocWrapper.class);
+      } catch (IOException e) {
+        throw new RuntimeException(e);
+      }
+    }
+    else{
+      article = null;
+    }
+
+    return article;
+  }
+
+  @Override
+  public Object getAny(String id, final String typeName) {
+    final GetResponse response = client.prepareGet(typeName, typeName, id).get();
+
+    final Object article;
+    if(response.isExists()){
+      try {
+        article = objectMapper.readValue(response.getSourceAsString(), Object.class);
       } catch (IOException e) {
         throw new RuntimeException(e);
       }

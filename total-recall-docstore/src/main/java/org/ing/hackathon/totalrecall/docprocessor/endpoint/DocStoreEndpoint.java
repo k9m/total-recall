@@ -26,12 +26,29 @@ public class DocStoreEndpoint {
     elasticClient.saveDoc(document, typeName.toLowerCase());
   }
 
+  @RequestMapping(value = "saveAny/{typeName}/{id}", method = RequestMethod.POST)
+  public void saveAny(
+          @PathVariable final String id,
+          @PathVariable final String typeName,
+          @RequestBody final Object document){
+    log.info("Save any {},{}", typeName, id);
+    elasticClient.saveAny(id, typeName.toLowerCase(), document);
+  }
+
   @RequestMapping(value = "get/{typeName}/{id}", method = RequestMethod.GET)
-  public DocWrapper saveDoc(
+  public DocWrapper getDoc(
           @PathVariable final String typeName,
           @PathVariable final String id){
     log.info("Get document {},{}", typeName, id);
     return elasticClient.getDoc(id, typeName.toLowerCase());
+  }
+
+  @RequestMapping(value = "getAny/{typeName}/{id}", method = RequestMethod.GET)
+  public Object getAny(
+          @PathVariable final String typeName,
+          @PathVariable final String id){
+    log.info("Get document {},{}", typeName, id);
+    return elasticClient.getAny(id, typeName.toLowerCase());
   }
 
   @RequestMapping(value = "save-mask", method = RequestMethod.POST)

@@ -11,9 +11,13 @@ public interface ElasticClient {
 
   void saveDoc(DocWrapper article, String typeName);
 
+  void saveAny(String id, String typeName, Object blob);
+
   void saveMask(DocumentMasking article);
 
   DocWrapper getDoc(String id, String typeName);
+
+  Object getAny(String id, String typeName);
 
   List<DocWrapper> getDocByIds(List<String> ids, final String typeName);
 
