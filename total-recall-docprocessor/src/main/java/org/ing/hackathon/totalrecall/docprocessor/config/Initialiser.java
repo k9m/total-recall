@@ -34,7 +34,7 @@ public class Initialiser {
     try {
       fileUtils.listFilesOnClasspath("classpath:" + folderName + "/*.pdf").forEach(f -> insertDocument(folderName, f));
     } catch (Exception e) {
-      log.warn(folderName + " folder found!");
+      log.warn(folderName + " folder not found!");
     }
   }
 
