@@ -8,10 +8,10 @@
       <button *ngIf="currentDocumentMasks" (click)="saveSelectedDocumentMasks()" [disabled]="!currentDocumentMasks.id" mat-raised-button color="primary">Save mask</button>
     </div>
   </mat-menu>
-  <button *ngIf="currentDocument" [matMenuTriggerFor]="masksMenu" mat-raised-button color="primary">Predefined masks</button>
-  <button *ngIf="currentDocumentMasks" [matMenuTriggerFor]="maskSaveMenu" mat-raised-button color="primary">Save mask</button>
-  <button *ngIf="currentDocument" (click)="saveSelectedDocument('pdf')" [disabled]="!currentDocument.changed" mat-raised-button color="primary">PDF</button>
-  <button *ngIf="currentDocument" (click)="saveSelectedDocument('ocr')" [disabled]="!currentDocument.changed" mat-raised-button color="primary">OCR</button>
+  <button *ngIf="currentDocument" [matMenuTriggerFor]="masksMenu" mat-mini-fab color="primary">Load</button>
+  <button *ngIf="currentDocumentMasks" [matMenuTriggerFor]="maskSaveMenu" mat-mini-fab color="primary">Save</button>
+  <button *ngIf="currentDocument" (click)="saveSelectedDocument('pdf')" [disabled]="!currentDocument.changed" mat-mini-fab color="primary">PDF</button>
+  <button *ngIf="currentDocument" (click)="saveSelectedDocument('ocr')" [disabled]="!currentDocument.changed" mat-mini-fab color="primary">OCR</button>
 </div>
 
 <mat-tab-group class="app-viewport" (selectedTabChange)="tabSelected($event)">
