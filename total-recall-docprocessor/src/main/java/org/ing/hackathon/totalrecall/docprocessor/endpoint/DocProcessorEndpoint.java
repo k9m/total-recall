@@ -77,7 +77,7 @@ public class DocProcessorEndpoint {
                   .pageNr(pageMasking.getPageNumber() + 1)
                   .build());
 
-          data.put(region.getField(), createPayload(documentId, parsedText, true));
+          data.put(region.getField(), createPayload(documentId, parsedText, region.isNlp()));
         }
         catch (IOException exception) {
           data.put(region.getField(), null);
@@ -104,7 +104,7 @@ public class DocProcessorEndpoint {
                       pageMasking,
                       region);
 
-              data.put(region.getField(), createPayload(documentId, parsedText, true));
+              data.put(region.getField(), createPayload(documentId, parsedText, region.isNlp()));
             }
         )
     );
