@@ -1,8 +1,4 @@
 import { Injectable } from '@angular/core';
-import {Document} from "../model/document";
-import {DocumentPage} from "../model/document-page";
-import {Mask} from "../model/mask";
-import {Region} from "../model/Region";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs/Observable";
 

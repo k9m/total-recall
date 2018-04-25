@@ -34,3 +34,17 @@
 .app-document-item-header:hover {
     background-color: #FFFFFF !important;
 }
+
+.app-document-masks-id-input {
+    font-size: 19px;
+
+    padding: 5px;
+    margin: 5px;
+    width: 270px;
+}
+
+.app-document-masks-actions {
+    text-align: right;
+
+    margin: 5px;
+}

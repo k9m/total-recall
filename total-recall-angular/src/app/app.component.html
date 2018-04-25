@@ -1,4 +1,15 @@
 <div class="app-actions">
+  <mat-menu #masksMenu="matMenu" [overlapTrigger]="false">
+    <button mat-menu-item>Some mask</button>
+  </mat-menu>
+  <mat-menu #maskSaveMenu="matMenu" [overlapTrigger]="false">
+    <input (click)="$event.stopPropagation()" type="text" (input)="currentDocumentMasks.id = $event.target.value" class="app-document-masks-id-input" />
+    <div class="app-document-masks-actions">
+      <button *ngIf="currentDocumentMasks" (click)="saveSelectedDocumentMasks()" [disabled]="!currentDocumentMasks.id" mat-raised-button color="primary">Save mask</button>
+    </div>
+  </mat-menu>
+  <button *ngIf="currentDocument" [matMenuTriggerFor]="masksMenu" mat-raised-button color="primary">Predefined masks</button>
+  <button *ngIf="currentDocumentMasks" [matMenuTriggerFor]="maskSaveMenu" mat-raised-button color="primary">Save mask</button>
   <button *ngIf="currentDocument" (click)="saveSelectedDocument('pdf')" [disabled]="!currentDocument.changed" mat-raised-button color="primary">PDF</button>
   <button *ngIf="currentDocument" (click)="saveSelectedDocument('ocr')" [disabled]="!currentDocument.changed" mat-raised-button color="primary">OCR</button>
 </div>

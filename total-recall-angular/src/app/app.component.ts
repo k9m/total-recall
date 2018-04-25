@@ -5,6 +5,8 @@ import {DocumentPage} from "./model/document-page";
 import {Region} from "./model/Region";
 import {RegionMarkerComponent} from "./components/region-marker/region-marker.component";
 import {Mask} from "./model/mask";
+import {DocumentMasks} from "./model/document-masks";
+import {DocumentMasksService} from "./services/document-masks.service";
 
 @Component({
     selector: 'app-root',
@@ -13,12 +15,14 @@ import {Mask} from "./model/mask";
 })
 export class AppComponent implements OnInit {
     documents: Array<Document>;
+    documentMasks: Array<DocumentMasks>;
     currentDocument: Document;
+    currentDocumentMasks: DocumentMasks;
     currentPage: DocumentPage;
     savedDocumentsData: Map<string, Object> = new Map();
     savedDocumentsDataTabActive = false;
 
-    constructor(private documentsService: DocumentsService) {}
+    constructor(private documentsService: DocumentsService, private documentMasksService: DocumentMasksService) {}
 
     ngOnInit() {
         this.documentsService.getDocuments().subscribe(data => {
@@ -30,6 +34,14 @@ export class AppComponent implements OnInit {
                     ))
             ));
         });
+    }
+
+    loadSavedDocumentMasks() {
+        /*
+        this.documentMasksService.getDocumentMasks().subscribe(data => {
+            console.log(data);
+        });
+        */
     }
 
     updateRegion(region: Region, marker: RegionMarkerComponent) {
@@ -75,12 +87,14 @@ export class AppComponent implements OnInit {
 
     deselectDocument(document: Document) {
         if (this.currentDocument === document) {
+            this.currentDocumentMasks = null;
             this.currentDocument = null;
             this.currentPage = null;
         }
     }
 
     selectDocument(document: Document) {
+        this.currentDocumentMasks = new DocumentMasks("", new Map());
         this.currentDocument = document;
         this.currentPage = document.pages[0];
     }
@@ -118,6 +132,36 @@ export class AppComponent implements OnInit {
                         this.savedDocumentsData.set(document.documentId, data);
                     });
                 });
+        }
+    }
+
+    saveSelectedDocumentMasks(id: string) {
+        if (this.currentDocumentMasks) {
+            this.currentDocument.pages.reduce((result, page) => {
+                result.set(page.pageNr, page.mask);
+
+                return result;
+            }, this.currentDocumentMasks.masks);
+
+            let data = {
+                id: this.currentDocumentMasks.id,
+                masks: []
+            };
+
+            this.currentDocumentMasks.masks.forEach((mask, key) => data.masks.push({
+                pageNumber: key,
+                regions: mask.regions.map(region => ({
+                    field: region.field,
+                    x1: region.left,
+                    y1: region.top,
+                    x2: region.left + region.width,
+                    y2: region.top + region.height
+                }))
+            }));
+
+            this.documentMasksService.saveDocumentMasks(this.currentDocumentMasks.id, data).subscribe(() => {
+                this.loadSavedDocumentMasks();
+            });
         }
     }
 
