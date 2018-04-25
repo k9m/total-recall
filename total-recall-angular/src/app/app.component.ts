@@ -52,6 +52,7 @@ export class AppComponent implements OnInit {
             marker.width !== undefined &&
             marker.height !== undefined
         ) {
+            region.nlp = marker.nlp;
             region.field = marker.field;
             region.left = marker.left;
             region.top = marker.top;

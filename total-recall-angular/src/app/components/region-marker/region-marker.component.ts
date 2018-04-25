@@ -45,6 +45,7 @@ export class RegionMarkerComponent {
     @Input() width: number;
     @Input() height: number;
     @Input() field: string;
+    @Input() nlp: boolean;
     @Output() change = new EventEmitter<any>();
     @Output() removal = new EventEmitter<any>();
     draggingState: DraggingState;
@@ -133,6 +134,11 @@ export class RegionMarkerComponent {
 
     updateField(field) {
         this.field = field;
+        this.change.emit(this);
+    }
+
+    toggleNlp() {
+        this.nlp = !this.nlp;
         this.change.emit(this);
     }
 

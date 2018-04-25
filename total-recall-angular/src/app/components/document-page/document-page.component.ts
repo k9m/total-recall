@@ -27,7 +27,7 @@ export class DocumentPageComponent {
 
     startCreating(event: MouseEvent) {
         let position = jQuery(event.srcElement).offset();
-        let region = new Region("", event.clientX - position.left, event.clientY - position.top, 0, 0);
+        let region = new Region(false, "", event.clientX - position.left, event.clientY - position.top, 0, 0);
 
         this.regionCreationState = new RegionCreationState(
             event.clientX,

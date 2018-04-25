@@ -31,8 +31,22 @@
 .app-region-marker-close {
     display: inline-block;
     vertical-align: top;
-    padding: 3px 5px;
-    margin: 8px 6px;
+    padding: 3px 6px;
+    margin: 8px 6px 8px 2px;
+    line-height: 12px;
+
+    border: solid 1px #FFFFFF;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.app-region-marker-nlp {
+    display: inline-block;
+    vertical-align: top;
+    padding: 3px;
+    margin: 8px 2px;
     line-height: 10px;
 
     border: solid 1px #FFFFFF;
