@@ -29,9 +29,12 @@ public class OcrService {
 
     try {
       final BufferedImage img = convertToBufferedImage(imageInBytes);
-      return instance.doOCR(
+      final String text = instance.doOCR(
               img,
               generateRectangle(pageMasking, region, img));
+      log.info("Text parsed: {}", text);
+
+      return text;
     }
     catch (TesseractException e) {
       log.error("Error while OCR-ing with Tesseract", e);
