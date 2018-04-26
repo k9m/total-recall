@@ -153,6 +153,7 @@ export class AppComponent implements OnInit {
             this.currentDocumentMasks.masks.forEach((mask, key) => data.masks.push({
                 pageNumber: key,
                 regions: mask.regions.map(region => ({
+                    nlp: region.nlp,
                     field: region.field,
                     x1: region.left,
                     y1: region.top,
