@@ -50,7 +50,9 @@ export class AppComponent implements OnInit {
                             region.y1,
                             region.x2 - region.x1,
                             region.y2 - region.y1
-                        ))))
+                        ))));
+
+                        return result;
                     }, new Map())
                 )
             });
@@ -116,6 +118,14 @@ export class AppComponent implements OnInit {
     updatePageSize(page: DocumentPage, width: number, height: number) {
         page.width = width;
         page.height = height;
+    }
+
+    applySavedMask(documentMask: DocumentMasks) {
+        if (this.currentDocument) {
+            this.currentDocument.pages.forEach(page => {
+                page.mask = documentMask.masks.get(page.pageNr);
+            });
+        }
     }
 
     saveSelectedDocument(type: string) {

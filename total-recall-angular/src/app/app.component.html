@@ -1,6 +1,6 @@
 <div class="app-actions">
   <mat-menu #masksMenu="matMenu" [overlapTrigger]="false">
-    <button *ngFor="let mask of documentMasks" mat-menu-item>{{mask.id}}</button>
+    <button *ngFor="let mask of documentMasks" mat-menu-item (click)="applySavedMask(mask)">{{mask.id}}</button>
   </mat-menu>
   <mat-menu #maskSaveMenu="matMenu" [overlapTrigger]="false">
     <input (click)="$event.stopPropagation()" type="text" (input)="currentDocumentMasks.id = $event.target.value" class="app-document-masks-id-input" />
