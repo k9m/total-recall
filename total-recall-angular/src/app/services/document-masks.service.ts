@@ -10,10 +10,10 @@ export class DocumentMasksService {
     }
 
     getDocumentMasks(): Observable<any> {
-        return this.http.get("http://localhost:9801/get-masks");
+        return this.http.get("http://localhost:9801/masks");
     }
 
     saveDocumentMasks(id, documentMasks): Observable<any> {
-        return this.http.put("http://localhost:9801/saveAny/mask/" + String(id), documentMasks);
+        return this.http.put("http://localhost:9801/masks/" + String(id), documentMasks);
     }
 }

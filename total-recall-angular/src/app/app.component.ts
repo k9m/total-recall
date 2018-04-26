@@ -15,7 +15,7 @@ import {DocumentMasksService} from "./services/document-masks.service";
 })
 export class AppComponent implements OnInit {
     documents: Array<Document>;
-    documentMasks: Array<DocumentMasks>;
+    documentMasks: Array<DocumentMasks> = new Array<DocumentMasks>();
     currentDocument: Document;
     currentDocumentMasks: DocumentMasks;
     currentPage: DocumentPage;
@@ -34,14 +34,27 @@ export class AppComponent implements OnInit {
                     ))
             ));
         });
+
+        this.loadSavedDocumentMasks();
     }
 
     loadSavedDocumentMasks() {
-        /*
         this.documentMasksService.getDocumentMasks().subscribe(data => {
-            console.log(data);
+            this.documentMasks = data.map(item => {
+                return new DocumentMasks(
+                    item.id, item.masks.reduce((result, mask) => {
+                        result.set(mask.pageNumber, new Mask(mask.regions.map(region => new Region(
+                            region.nlp,
+                            region.field,
+                            region.x1,
+                            region.y1,
+                            region.x2 - region.x1,
+                            region.y2 - region.y1
+                        ))))
+                    }, new Map())
+                )
+            });
         });
-        */
     }
 
     updateRegion(region: Region, marker: RegionMarkerComponent) {
