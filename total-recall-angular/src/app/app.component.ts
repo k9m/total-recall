@@ -116,6 +116,7 @@ export class AppComponent implements OnInit {
                     pageWidth: page.width,
                     pageHeight: page.height,
                     regions: page.mask.regions.map(region => ({
+                        nlp: region.nlp,
                         field: region.field,
                         x1: region.left,
                         y1: region.top,
