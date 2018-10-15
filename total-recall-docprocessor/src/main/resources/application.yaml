@@ -9,7 +9,6 @@ server:
   port: 9802
   compression:
     enabled: true
-  compression:
     mime-types: application/json,application/xml,text/html,text/xml,text/plain,application/javascript,text/css
   connection-timeout: -1
 
