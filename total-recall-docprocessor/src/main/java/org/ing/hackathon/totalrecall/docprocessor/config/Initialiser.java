@@ -28,6 +28,7 @@ public class Initialiser {
   public void init(){
     loadFilesInFolder("sample");
     loadFilesInFolder("sample-ignored");
+    loadFilesInFolder("sample-long");
   }
 
   private void loadFilesInFolder(final String folderName){

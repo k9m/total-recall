@@ -6,5 +6,5 @@ spring:
     name: total-recall-docstore
 elastic:
   clusterName: docstore
-  host: 127.0.0.1
+  host: localhost
   port: 9300

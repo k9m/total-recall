@@ -20,6 +20,17 @@ services:
       - 9200:9200
       - 9300:9300
 
+#  total-recall-docstore:
+#    build: ./total-recall-docstore
+#    ports:
+#      - 9801:9801
+#
+#  total-recall-docprocessor:
+#    build: ./total-recall-docprocessor
+#    ports:
+#      - 9802:9802
+
+
 #  portainer:
 #    image: portainer/portainer:latest
 #    container_name: portainer

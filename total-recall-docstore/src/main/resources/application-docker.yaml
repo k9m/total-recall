@@ -1,0 +1,4 @@
+elastic:
+  clusterName: docstore
+  host: elastic
+  port: 9300
